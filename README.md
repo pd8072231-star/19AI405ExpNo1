@@ -21,11 +21,11 @@
     <td><strong>Sensors</strong></td>
   </tr>
     <tr>
-    <td><strong>Vaccum cleaner agent</strong></td>
-    <td><strong>Amount of dirt cleaned,Time taken ,Battery usage ,Safety and minimal floor damage</strong></td>
-     <td><strong>Two or more rooms/squares,Floor surfaces (carpet, wood),Dirt, dust, and obstacles (furniture, walls)</strong></td>
-    <td><strong>Wheels (move left, right, forward, backward),Vacuum suction (clean dirt),Brooms or brushes</strong></td>
-    <td><strong>Dirt sensor (detects filth on the current floor tile),Location/position sensor (identifies current room or coordinates),Bump or obstacle sensor (detects walls and furniture)</strong></td>
+    <td><strong>Medicine prescribing agent</strong></td>
+    <td><strong>Treating unhealthy, agent movement</strong></td>
+     <td><strong>Rooms, Patient</strong></td>
+    <td><strong>Medicine, Treatment</strong></td>
+    <td><strong>Location, Temperature of patient</strong></td>
   </tr>
 </table>
 <hr>
@@ -40,84 +40,69 @@
 <p>Treat unhealthy patients in each room. And check for the unhealthy patients in random room</p>
 <h3>STEP 5:</h3>
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
-<h3>Code:</h3>
-<br>
-```
+## Code:
+
 import random
 
-# -----------------------------
-# Vacuum Cleaner Agent
-# -----------------------------
-class VacuumCleanerAgent:
+class HealthMonitoringAgent:
+    def __init__(self, patient_data):
+        self.patient_data = patient_data
 
-    def __init__(self):
-        self.sensors = VacuumSensors()
-        self.actuators = VacuumActuators()
-
-    def clean(self):
-
-        # Run only 4 iterations
-        for i in range(4):
-
-            print("\n========== Iteration", i + 1, "==========")
-
-            # Get current room status
-            environment = self.sensors.get_environment()
-
-            print("Current Room :", environment["room"])
-            print("Room Status  :", environment["status"])
-
-            # Decide action
-            action = self.choose_action(environment)
-
-            # Perform action
+    def monitor_health(self):
+        while True:
+            current_health_state = self.sensors.get_health_state()
+            print("\nCurrent Health State:")
+            print("Heart Rate:", current_health_state['heart_rate'])
+            print("Blood Pressure:", current_health_state['blood_pressure'])
+            print("Temperature:", round(current_health_state['temperature'], 2))
+            action = self.choose_action(current_health_state)
             self.actuators.perform_action(action)
+            if self.choose_action(current_health_state)=="No specific action needed":
+                break
 
-        print("\nCleaning completed after 4 iterations.")
-
-    def choose_action(self, environment):
-
-        if environment["status"] == "Dirty":
-            return "Suck Dust"
-
+    def choose_action(self, current_health_state):
+        # Example: A simple rule-based system for decision-making
+        if current_health_state['heart_rate'] > 120:
+            return "Alert healthcare provider: High heart rate detected"
+        elif current_health_state['blood_pressure'] > 140:
+            return "Alert healthcare provider: High blood pressure detected"
+        elif current_health_state['temperature'] > 38:
+            return "Recommend rest and monitor temperature"
         else:
-            return "Move to Next Room"
+            return "No specific action needed"
 
-
-# -----------------------------
-# Sensors
-# -----------------------------
-class VacuumSensors:
-
-    def get_environment(self):
-
+class HealthSensors:
+    def get_health_state(self):
+        # Example: Simulate health data retrieval (replace with real data in a practical scenario)
         return {
-            "room": random.choice(["Room A", "Room B"]),
-            "status": random.choice(["Clean", "Dirty"])
+            'heart_rate': random.randint(60, 150),
+            'blood_pressure': random.randint(90, 160),
+            'temperature': random.uniform(36.0, 38.5)
         }
 
-
-# -----------------------------
-# Actuators
-# -----------------------------
-class VacuumActuators:
-
+class HealthActuators:
     def perform_action(self, action):
-        print("Action       :", action)
+        # Example: Print or log the action (in a real scenario, this might involve more complex actions)
+        print(action)
 
-
-# -----------------------------
-# Main Program
-# -----------------------------
 if __name__ == "__main__":
+    patient_data = {'patient_id': 123, 'name': 'John Doe', 'age': 35}
+    
+    health_sensors = HealthSensors()
+    health_actuators = HealthActuators()
+    
+    health_monitoring_agent = HealthMonitoringAgent(patient_data)
+    health_monitoring_agent.sensors = health_sensors
+    health_monitoring_agent.actuators = health_actuators
+    
+    health_monitoring_agent.monitor_health()
 
-    print("====== VACUUM CLEANER AGENT ======")
+## Output:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e7bded5d-af27-4d98-84ac-bffe417ee71e" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/25043085-477c-4c0b-afad-9fa1fef9cdd4" />
 
-    vacuum = VacuumCleanerAgent()
+## Result:
+Thus,the program executed for medical diagnosis agent successfully.
 
-    vacuum.clean()
-```
-<h3>Output:</h3>
-<br>
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/06da5419-c8e6-4367-a962-b8b521764224" />
+
 
