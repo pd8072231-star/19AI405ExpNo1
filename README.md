@@ -40,3 +40,83 @@
 <p>Treat unhealthy patients in each room. And check for the unhealthy patients in random room</p>
 <h3>STEP 5:</h3>
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
+<h3>Code:</h3>
+<br>
+```import random
+
+# -----------------------------
+# Vacuum Cleaner Agent
+# -----------------------------
+class VacuumCleanerAgent:
+
+    def __init__(self):
+        self.sensors = VacuumSensors()
+        self.actuators = VacuumActuators()
+
+    def clean(self):
+
+        # Run only 4 iterations
+        for i in range(4):
+
+            print("\n========== Iteration", i + 1, "==========")
+
+            # Get current room status
+            environment = self.sensors.get_environment()
+
+            print("Current Room :", environment["room"])
+            print("Room Status  :", environment["status"])
+
+            # Decide action
+            action = self.choose_action(environment)
+
+            # Perform action
+            self.actuators.perform_action(action)
+
+        print("\nCleaning completed after 4 iterations.")
+
+    def choose_action(self, environment):
+
+        if environment["status"] == "Dirty":
+            return "Suck Dust"
+
+        else:
+            return "Move to Next Room"
+
+
+# -----------------------------
+# Sensors
+# -----------------------------
+class VacuumSensors:
+
+    def get_environment(self):
+
+        return {
+            "room": random.choice(["Room A", "Room B"]),
+            "status": random.choice(["Clean", "Dirty"])
+        }
+
+
+# -----------------------------
+# Actuators
+# -----------------------------
+class VacuumActuators:
+
+    def perform_action(self, action):
+        print("Action       :", action)
+
+
+# -----------------------------
+# Main Program
+# -----------------------------
+if __name__ == "__main__":
+
+    print("====== VACUUM CLEANER AGENT ======")
+
+    vacuum = VacuumCleanerAgent()
+
+    vacuum.clean()
+```
+<h3>Output:</h3>
+<br>
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/06da5419-c8e6-4367-a962-b8b521764224" />
+
