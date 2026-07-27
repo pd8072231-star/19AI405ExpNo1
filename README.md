@@ -42,7 +42,8 @@
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
 <h3>Code:</h3>
 <br>
-```import random
+```
+import random
 
 # -----------------------------
 # Vacuum Cleaner Agent
