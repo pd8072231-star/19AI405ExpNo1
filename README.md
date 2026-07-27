@@ -21,11 +21,11 @@
     <td><strong>Sensors</strong></td>
   </tr>
     <tr>
-    <td><strong>Medicine prescribing agent</strong></td>
-    <td><strong>Treating unhealthy, agent movement</strong></td>
-     <td><strong>Rooms, Patient</strong></td>
-    <td><strong>Medicine, Treatment</strong></td>
-    <td><strong>Location, Temperature of patient</strong></td>
+    <td><strong>Vaccum cleaner agent</strong></td>
+    <td><strong>Amount of dirt cleaned,Time taken ,Battery usage ,Safety and minimal floor damage</strong></td>
+     <td><strong>Two or more rooms/squares,Floor surfaces (carpet, wood),Dirt, dust, and obstacles (furniture, walls)</strong></td>
+    <td><strong>Wheels (move left, right, forward, backward),Vacuum suction (clean dirt),Brooms or brushes</strong></td>
+    <td><strong>Dirt sensor (detects filth on the current floor tile),Location/position sensor (identifies current room or coordinates),Bump or obstacle sensor (detects walls and furniture)</strong></td>
   </tr>
 </table>
 <hr>
